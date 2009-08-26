@@ -190,14 +190,13 @@ streams); wrap it."
      (advance-stream-position stream size))))
 
 (defun read-application-extension (stream data-stream)
-  (let ((signature-length (read-byte stream)))
-    (assert (= signature-length 11))
-    (let ((identifier (make-array signature-length :element-type 'octet)))
-      (read-sequence identifier stream)
+  (let ((block-size (read-byte stream)))
+    (let ((block (make-array block-size :element-type 'octet)))
+      (read-sequence block stream)
       ;;; XXX If skippy ever supports more application extensions, it
       ;;; would make sense to put them in a table instead of
       ;;; hardcoding specific extension identifiers here.
-      (when (equalp identifier *netscape-signature*)
+      (when (equalp block *netscape-signature*)
         (setf (loopingp data-stream) t)))
     (skip-data-blocks stream)))
 
