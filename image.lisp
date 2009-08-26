@@ -30,6 +30,13 @@
 
 (defvar *default-delay-time* 100)
 
+(defun check-image-dimensions (width height)
+  (unless (and (typep width 'image-dimension)
+               (typep height 'image-dimension))
+    (error 'invalid-image-dimensions
+           :width width
+           :height height)))
+
 (defclass image (canvas)
   ((data-stream
     :initarg :data-stream
@@ -147,6 +154,7 @@ stream. There may be multiple images in the data stream."))
                    (delay-time *default-delay-time*)
                    transparency-index
                    (disposal-method :unspecified))
+  (check-image-dimensions width height)
   (make-instance 'image
                  :height height
                  :width width

@@ -117,3 +117,18 @@
    (lambda (condition stream)
      (format stream "Color table ~A is full (256 entries)"
              (color-table-full-color-table condition)))))
+
+(define-condition invalid-image-dimensions (skippy-error)
+  ((width
+    :initarg :width
+    :reader invalid-image-dimension-width)
+   (height
+    :initarg :height
+    :reader invalid-image-dimension-height))
+  (:report
+   (lambda (condition stream)
+     (format stream "Invalid image dimensions ~Ax~A - each dimensions must ~
+                     be (< 0 dimension 65536)"
+             (invalid-image-dimension-width condition)
+             (invalid-image-dimension-height condition)))))
+

@@ -36,3 +36,7 @@
 
 (deftype bitstream-buffer ()
   `(simple-array octet (255)))
+
+(deftype image-dimension ()
+  `(integer 1 #xFFFF))
+

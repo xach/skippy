@@ -159,7 +159,10 @@ the effective color table of INDEX."
 
 (defun write-image (image context stream)
   (let* ((color-table (color-table image))
-         (code-size (compression-code-size image)))
+         (code-size (compression-code-size image))
+         (width (width image))
+         (height (height image)))
+    (check-image-dimensions width height)
     (write-graphic-control-block image stream)
     (write-byte +image-separator-code+ stream)
     (write-uint16 (left-position image) stream)
