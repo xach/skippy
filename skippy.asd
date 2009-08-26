@@ -31,7 +31,7 @@
 (in-package #:skippy-system)
 
 (defsystem #:skippy
-  :version "1.3.5"
+  :version "1.3.6"
   :author "Zachary Beane <xach@xach.com>"
   :components ((:file "package")
                (:file "conditions"
