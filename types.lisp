@@ -24,7 +24,6 @@
 ;;; NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 ;;; SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ;;;
-;;;; $Id: types.lisp,v 1.3 2006/12/10 22:56:08 xach Exp $
 
 (in-package #:skippy)
 
@@ -39,4 +38,3 @@
 
 (deftype image-dimension ()
   `(integer 1 #xFFFF))
-
