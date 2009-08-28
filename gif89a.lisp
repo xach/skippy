@@ -82,6 +82,10 @@ replace any out-of-range character codes with #\\Space."
   ;;; Comments must be at least one character long
   (when (zerop (length comment))
     (return-from write-comment))
+  (when (< 255 (length comment))
+    (skippy-warn "Truncating comment from ~D to 255 characters"
+                 (length comment))
+    (setf comment (subseq comment 255)))
   (flet ((cleaned-char-code (char)
            (let ((code (char-code char)))
              (if (> code 127) 32 code))))
