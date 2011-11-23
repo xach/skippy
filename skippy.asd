@@ -33,6 +33,7 @@
 (defsystem #:skippy
   :version "1.3.7"
   :author "Zachary Beane <xach@xach.com>"
+  :description "Read and write GIF files"
   :components ((:file "package")
                (:file "conditions"
                       :depends-on ("package"))
