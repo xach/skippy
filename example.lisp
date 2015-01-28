@@ -62,6 +62,7 @@
          (white (ensure-color #xFFFFFF color-table))
          (black (ensure-color #x000000 color-table))
          (bg (make-image :data-stream data-stream
+                         :width width :height height
                          :image-data (make-image-data height width
                                                       :initial-element gray)))
          (sprite-data (make-image-data 3 3)))
