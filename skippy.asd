@@ -31,7 +31,7 @@
 (in-package #:skippy-system)
 
 (defsystem #:skippy
-  :version "1.3.9"
+  :version "1.3.10"
   :author "Zachary Beane <xach@xach.com>"
   :description "Read and write GIF files"
   :components ((:file "package")
