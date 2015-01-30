@@ -1,13 +1,27 @@
 <head>
 <title>SKIPPY - Read and write GIF files with Common Lisp</title>
 <style type="text/css">
-a, a:visited { text-decoration: none }
-a[href]:hover { text-decoration: underline }
-pre { background: #DDD; padding: 0.25em }
+  a, a:visited { text-decoration: none }
+  a[href]:hover { text-decoration: underline }
+  pre { background: #DDD; padding: 0.25em }
+  p.download { color: red }
+  .transparent { background-image: url(background.gif) }
+  #content { 
+  max-width: 50em; margin-left: auto;  margin-right: auto;
+  font-family: sans-serif; 
+  line-height: 1.4em;
+  background-color: white;
+  padding: 0.25em 1em 0.25em 1em;
+  }
+  body {
+  background-color: #f4eecf;
+  }
 </style>
 </head>
 
 <body>
+<div id="content">
+
 
 <h2>SKIPPY - Read and write GIF files with Common Lisp</h2>
 
@@ -243,6 +257,7 @@ Specification</a>.
          (white (<a href="#ensure-color">ensure-color</a> #xFFFFFF color-table))
          (black (<a href="#ensure-color">ensure-color</a> #x000000 color-table))
          (bg (<a href="#make-image">make-image</a> :data-stream data-stream
+                         :width width :height height
                          :image-data (<a href="#make-image-data">make-image-data</a> height width
                                                       :initial-element gray)))
          (sprite-data (<a href="#make-image-data">make-image-data</a> 3 3)))
@@ -943,3 +958,4 @@ and corrupted GIFs so I could make Skippy handle them.
 <p>Thanks to Martin Rydstr&ouml;m and Ignas Mikalajunas for reviewing
 this documentation and offering helpful advice.
 
+</div>
