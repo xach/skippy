@@ -34,6 +34,7 @@
   :version "1.3.11"
   :author "Zachary Beane <xach@xach.com>"
   :description "Read and write GIF files"
+  :license "BSD"
   :components ((:file "package")
                (:file "conditions"
                       :depends-on ("package"))
