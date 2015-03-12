@@ -31,7 +31,7 @@
 (in-package #:skippy-system)
 
 (defsystem #:skippy
-  :version "1.3.11"
+  :version "1.3.12"
   :author "Zachary Beane <xach@xach.com>"
   :description "Read and write GIF files"
   :license "BSD"
