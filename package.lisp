@@ -30,6 +30,7 @@
   (:use #:cl)
   (:export
    ;; data-stream
+   #:data-stream
    #:make-data-stream
    #:height
    #:width
@@ -38,12 +39,10 @@
    #:comment
    #:images
    ;; image
+   #:image
    #:*default-delay-time*
    #:make-image
    #:image-data
-   ;;data-stream
-   ;;width
-   ;;height
    #:top-position
    #:left-position
    #:disposal-method
@@ -51,6 +50,7 @@
    #:transparency-index
    #:make-image-data
    ;; color tables
+   #:color-table
    #:make-color-table
    #:add-color
    #:find-color
@@ -61,6 +61,7 @@
    #:color-table-entry
    #:copy-color-table
    ;; canvas
+   #:canvas
    #:make-canvas
    #:composite
    #:fill-area
