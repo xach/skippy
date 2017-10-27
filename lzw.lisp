@@ -28,6 +28,9 @@
 
 (in-package #:skippy)
 
+(defconstant +maximum-code-bits+ 12
+  "The maximum bits per code, as defined by the specification.")
+
 (defclass compression-context ()
   ((table
     :initform (make-hash-table)
@@ -110,12 +113,12 @@ multiple images in a GIF animation."))
 
 (defclass decompression-context ()
   ((entries
-    :initform (make-array 4096
+    :initform (make-array (expt 2 +maximum-code-bits+)
                           :element-type 'string-table-entry
                           :initial-element -1)
     :reader entries)
    (preds
-    :initform (make-array 4096
+    :initform (make-array (expt 2 +maximum-code-bits+)
                           :element-type 'string-table-entry
                           :initial-element -1)
     :reader preds))
@@ -145,17 +148,18 @@ be allocated fresh each time."))
                    compression-size compression-threshold
                    last-code pos)
              (type bitstream bitstream))
-    (fill entries -1)
+    (fill entries -1 :start clear-code)
     (fill preds -1)
     (dotimes (i clear-code)
       (setf (aref entries i) i))
     (labels ((reset-table ()
-               (fill preds -1)
-               (fill entries -1 :start clear-code)
-               (setf last-code -1
-                     next-entry-index (+ clear-code 2)
-                     compression-size (1+ code-size)
-                     compression-threshold (* clear-code 2)))
+	       (when (/= last-code -1)
+		 (fill preds -1)
+		 (fill entries -1 :start clear-code)
+		 (setf last-code -1
+		       next-entry-index (+ clear-code 2)
+		       compression-size (1+ code-size)
+		       compression-threshold (* clear-code 2))))
              (root-value (code)
                (loop
                 (let ((pred (aref preds code)))
@@ -163,9 +167,12 @@ be allocated fresh each time."))
                     (return (aref entries code)))
                   (setf code pred))))
              (increase-compression-size ()
-               (setf compression-size (min 12 (+ compression-size 1))
+               (setf compression-size (min +maximum-code-bits+
+					   (+ compression-size 1))
                      compression-threshold (* compression-threshold 2)))
              (add-entry (entry pred)
+	       (when (> compression-threshold (expt 2 +maximum-code-bits+))
+		 (return-from add-entry next-entry-index))
                (when (>= pred next-entry-index)
                  (error 'lzw-error
                         :description "Corrupt data in LZW stream"))
