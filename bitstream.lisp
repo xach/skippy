@@ -27,13 +27,14 @@
 ;;;; $Id: bitstream.lisp,v 1.6 2007/01/03 22:02:37 xach Exp $
 
 (in-package #:skippy)
-
-(declaim (inline bitstream-buffer))
-(declaim (inline bitstream-offset))
-(declaim (inline bitstream-octet))
-(declaim (inline bitstream-count))
-(declaim (inline bitstream-bits-left))
-(declaim (inline bitstream-stream))
+#-cmucl
+(progn
+  (declaim (inline bitstream-buffer))
+  (declaim (inline bitstream-offset))
+  (declaim (inline bitstream-octet))
+  (declaim (inline bitstream-count))
+  (declaim (inline bitstream-bits-left))
+  (declaim (inline bitstream-stream)))
 
 (defstruct (bitstream
              (:constructor
