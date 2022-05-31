@@ -276,7 +276,7 @@ streams); wrap it."
              :source stream
              :position pos))))
 
-(defun read-data-stream (stream)
+(defun read-data-stream (stream &key synopsis)
   (check-gif-signature stream)
   (let ((width (read-uint16 stream))
         (height (read-uint16 stream))
@@ -292,16 +292,17 @@ streams); wrap it."
          (sorted-flag             1)
          (global-color-table-size 3))
       (declare (ignore color-resolution sorted-flag))
-      (when (plusp global-color-table-flag)
+      (when (and (plusp global-color-table-flag) (not synopsis))
         (let ((color-table-entry-count (expt 2 (1+ global-color-table-size))))
           (setf color-table (read-color-table color-table-entry-count
                                               stream))))
       (let ((data-stream (make-data-stream :height height
                                            :width width
                                            :color-table color-table)))
-        (process-objects data-stream stream)
+	(when (not synopsis)
+	  (process-objects data-stream stream))
         data-stream))))
             
-(defun load-data-stream (file)
+(defun load-data-stream (file &key synopsis)
   (with-open-file (stream file :direction :input :element-type 'octet)
-    (read-data-stream stream)))
+    (read-data-stream stream :synopsis synopsis)))

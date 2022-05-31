@@ -503,7 +503,7 @@ returns no value. The stream should accept
 
 
 <p><a name='load-data-stream'>[Function]</a><br>
-<b>load-data-stream</b> <i>file</i> => <i>data-stream</i>
+<b>load-data-stream</b> <i>file</i> <tt>&amp;key</tt> <i>synopsis</i> => <i>data-stream</i>
 
 <blockquote>
 
@@ -521,19 +521,24 @@ anyway)
 
 </ul>
 
-<p>
+<p>If <i>synopsis</i> is non-NIL, don't read the raster data, just the
+  image metadata.
 
 </blockquote>
 
 
 <p><a name='read-data-stream'>[Function]</a><br>
-<b>read-data-stream</b> <i>stream</i> => <i>data-stream</i>
+<b>read-data-stream</b> <i>stream</i> <tt>&amp;key</tt> <i>synopsis</i> => <i>data-stream</i>
 
 <blockquote>
 Reads a GIF89a or GIF87a data stream from <i>stream</i> and returns it
 as a SKIPPY data stream object. The stream should be compatible with
 reading <tt>(UNSIGNED-BYTE&nbsp;8)</tt> data via <tt>CL:READ-BYTE</tt>
 and <tt>CL:READ-SEQUENCE</tt>.
+
+<p>If <i>synopsis</i> is non-NIL, don't read the raster data, just the
+  image metadata.
+
 </blockquote>
 
 
